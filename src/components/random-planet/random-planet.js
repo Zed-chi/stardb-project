@@ -5,12 +5,12 @@ import "./random-planet.css";
 
 
 class RandomPlanet extends React.Component{    
-    componentDidMount(){
-        this.state = {
-            planet:{},
-            loading:true,
-            error:false,
-        };
+    state = {
+        planet:{},
+        loading:true,
+        error:false,
+    };
+    componentDidMount(){        
         this.swapiService = new Swapi();
         this.updatePlanet();
         this.interval = setInterval(this.updatePlanet,15000);
