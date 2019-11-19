@@ -6,33 +6,25 @@ import "./random-planet.css";
 class RandomPlanet extends React.Component{
     swapiService = new Swapi();
     state = {
-        id:null,
-        name:"",
-        population:null,
-        rotationPeriod:null,
-        diameter:null
+        planet:{}
     };
     constructor(){
         super();
         this.updatePlanet();
     }
+
+    onPlanetLoaded = (planet) => {
+        this.setState({planet});
+    };
     updatePlanet(){
-        const id = Math.floor(Math.random()*30) +2;
+        const id = Math.floor(Math.random()*19)+1;
         this.swapiService.getPlanet(id)
-        .then(
-            ({name, population,rotation_period,diameter})=>{
-                this.setState({
-                    name:name,
-                    population:population,
-                    diameter:diameter,
-                    rotationPeriod:rotation_period,
-                    id:id
-                });
-            });
+        .then(this.onPlanetLoaded)
+        
     }
 
     render(){
-        const {id, name, population,rotationPeriod,diameter} = this.state;
+        const {planet: {id, name, population,rotationPeriod,diameter}} = this.state;
         return (
         <div className="card w-100 d-flex flex-row random-planet">
             <img src={`https://starwars-visualguide.com/assets/img/planets/${id}.jpg`} className="img-fluid img-thumbnail"/>
