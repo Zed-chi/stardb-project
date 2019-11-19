@@ -8,6 +8,15 @@ import StarshipDetails from "../starship-details/starship-details";
 import "./app.css";
 
 class App extends React.Component{
+    state = {
+        selectedPerson:null,
+        showRandomPlanet:true
+    }
+    onPersonSelected = (id)=>{
+        this.setState({
+            selectedPerson:id
+        })
+    }
     render(){
         return (
             <div className="container">
@@ -20,10 +29,10 @@ class App extends React.Component{
 
                 <div className="">
                     <div className="col-md-6">
-                        <ItemList/>
+                        <ItemList onItemSelected={this.onPersonSelected}/>
                     </div>
                     <div className="col-md-6">
-                        <PersonDetails/>
+                        <PersonDetails personId={this.state.selectedPerson}/>
                     </div>
                 </div>
             </div>
