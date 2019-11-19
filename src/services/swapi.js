@@ -39,7 +39,9 @@ class SwapiService {
 
     _extractId(item){
         const reg = /\/([0-9]+)\/$/;
-        return item.url.match(reg)[1];
+        const id = item.url.match(reg);
+        console.log("id is - ",id[1]);
+        return id[1];
     }
 
     _transformPlanet(planet){
