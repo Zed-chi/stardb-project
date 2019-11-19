@@ -8,11 +8,13 @@ class SwapiService {
     }
     
     async getAllPeople(){
-        return await this.getResource("/people");
+        const persons = await this.getResource("/people");
+        return persons.map(this._transformPerson);
     }
 
     async getPerson(id){
-        return await this.getResource(`/people/${id}`);
+        const person = await this.getResource(`/people/${id}`);
+        return this._transformPerson(person);
     }
 
     async getAllPlanets(){
@@ -26,19 +28,51 @@ class SwapiService {
     }
 
     async getAllStarships(){
-        return await this.getResource("/starships");
+        const ships = await this.getResource("/starships");
+        return ships.map(this._transformSpaceship);
     }
 
     async getStarship(id){
-        return await this.getResource(`/starships/${id}`);
+        const ship = await this.getResource(`/starships/${id}`);
+        return this._transformSpaceship(ship);
+    }
+
+    _extractId(item){
+        const reg = /\/([0-9]+)\/$/;
+        return item.url.match(reg)[1];
     }
 
     _transformPlanet(planet){
         return {
+            id:this._extractId(planet),
             name:planet.name,
             population:planet.population,
             diameter:planet.diameter,
             rotationPeriod:planet.rotation_period,
+        };
+    }
+
+    _transformPerson(person){
+        return {
+            id:this._extractId(person),
+            name:person.name,
+            gender:person.gender,
+            birthOfYear:person.birthOfYear,
+            eyeColor:person.eyeColor,
+        };
+    }
+
+    _transformSpaceship(spaceship){
+        return {
+            id:this._extractId(spaceship),
+            name:spaceship.name,
+            model:spaceship.model,
+            manufacturer:spaceship.manufacturer,
+            costInCredits:spaceship.costInCredits,
+            length:spaceship.length,
+            crew:spaceship.crew,
+            passengers:spaceship.passengers,
+            cargoCapacity:spaceship.cargoCapacity,
         };
     }
 }
