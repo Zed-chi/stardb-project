@@ -6,75 +6,75 @@ class SwapiService {
         const body = await res.json();
         return body;
     }
-    
-    async getAllPeople(){
+
+    async getAllPeople() {
         const persons = await this.getResource("/people");
         return persons.map(this._transformPerson);
     }
 
-    async getPerson(id){
+    async getPerson(id) {
         const person = await this.getResource(`/people/${id}`);
         return this._transformPerson(person);
     }
 
-    async getAllPlanets(){
+    async getAllPlanets() {
         const planets = await this.getResource("/planets");
         return planets.results.map(this._transformPlanet);
     }
 
-    async getPlanet(id){
+    async getPlanet(id) {
         const planet = await this.getResource(`/planets/${id}`);
         return this._transformPlanet(planet);
     }
 
-    async getAllStarships(){
+    async getAllStarships() {
         const ships = await this.getResource("/starships");
         return ships.map(this._transformSpaceship);
     }
 
-    async getStarship(id){
+    async getStarship(id) {
         const ship = await this.getResource(`/starships/${id}`);
         return this._transformSpaceship(ship);
     }
 
-    _extractId(item){
+    _extractId(item) {
         const reg = /\/([0-9]+)\/$/;
         const id = item.url.match(reg);
-        console.log("id is - ",id[1]);
+        console.log("id is - ", id[1]);
         return id[1];
     }
 
-    _transformPlanet(planet){
+    _transformPlanet(planet) {
         return {
-            id:this._extractId(planet),
-            name:planet.name,
-            population:planet.population,
-            diameter:planet.diameter,
-            rotationPeriod:planet.rotation_period,
+            id: this._extractId(planet),
+            name: planet.name,
+            population: planet.population,
+            diameter: planet.diameter,
+            rotationPeriod: planet.rotation_period,
         };
     }
 
-    _transformPerson(person){
+    _transformPerson(person) {
         return {
-            id:this._extractId(person),
-            name:person.name,
-            gender:person.gender,
-            birthOfYear:person.birthOfYear,
-            eyeColor:person.eyeColor,
+            id: this._extractId(person),
+            name: person.name,
+            gender: person.gender,
+            birthOfYear: person.birthOfYear,
+            eyeColor: person.eyeColor,
         };
     }
 
-    _transformSpaceship(spaceship){
+    _transformSpaceship(spaceship) {
         return {
-            id:this._extractId(spaceship),
-            name:spaceship.name,
-            model:spaceship.model,
-            manufacturer:spaceship.manufacturer,
-            costInCredits:spaceship.costInCredits,
-            length:spaceship.length,
-            crew:spaceship.crew,
-            passengers:spaceship.passengers,
-            cargoCapacity:spaceship.cargoCapacity,
+            id: this._extractId(spaceship),
+            name: spaceship.name,
+            model: spaceship.model,
+            manufacturer: spaceship.manufacturer,
+            costInCredits: spaceship.costInCredits,
+            length: spaceship.length,
+            crew: spaceship.crew,
+            passengers: spaceship.passengers,
+            cargoCapacity: spaceship.cargoCapacity,
         };
     }
 }
