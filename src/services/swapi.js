@@ -7,32 +7,32 @@ class SwapiService {
         return body;
     }
 
-    async getAllPeople() {
+    getAllPeople = async ()=> {
         const persons = await this.getResource("/people");
         return persons.results.map(this._transformPerson);
     }
 
-    async getPerson(id) {
+    getPerson = async (id)=> {
         const person = await this.getResource(`/people/${id}`);
         return this._transformPerson(person);
     }
 
-    async getAllPlanets() {
+    getAllPlanets = async() => {
         const planets = await this.getResource("/planets");
         return planets.results.map(this._transformPlanet);
     }
 
-    async getPlanet(id) {
+    getPlanet = async(id) => {
         const planet = await this.getResource(`/planets/${id}`);
         return this._transformPlanet(planet);
     }
 
-    async getAllStarships() {
+    getAllStarships = async() => {
         const ships = await this.getResource("/starships");
         return ships.results.map(this._transformSpaceship);
     }
 
-    async getStarship(id) {
+    getStarship = async(id) => {
         const ship = await this.getResource(`/starships/${id}`);
         return this._transformSpaceship(ship);
     }
