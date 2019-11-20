@@ -27,13 +27,9 @@ class App extends React.Component{
                 <RandomPlanet/>
                 </div>
 
-                <div className="">
-                    <div className="col-md-6">
-                        <ItemList onItemSelected={this.onPersonSelected}/>
-                    </div>
-                    <div className="col-md-6">
-                        <PersonDetails personId={this.state.selectedPerson}/>
-                    </div>
+                <div className="row">                    
+                        <ItemList onItemSelected={this.onPersonSelected}/>        
+                        <PersonDetails personId={this.state.selectedPerson}/>            
                 </div>
             </div>
         );

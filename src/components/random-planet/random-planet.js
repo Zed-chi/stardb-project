@@ -19,6 +19,9 @@ class RandomPlanet extends React.Component{
     componentWillUnmount(){
         clearInterval(this.interval);
     }
+    componentDidCatch(err){
+
+    }
     onPlanetLoaded = (planet) => {
         this.setState({planet, loading:false});
     };
@@ -40,7 +43,7 @@ class RandomPlanet extends React.Component{
         const content = !loading && !error ? <PlanetViewContent planet={this.state}/> : null;
         const errorSplash = error ? <LoadingError/> :null;
         return (
-        <div className="justify-content-center card w-100 d-flex flex-row random-planet">
+        <div className="card w-100 d-flex flex-row random-planet p-2">
             {spinner}
             {content}
             {errorSplash}
@@ -61,8 +64,15 @@ const PlanetViewContent = ({planet}) =>{
     } = planet;
     return (
         <React.Fragment>
-            <img alt="planet" src={`https://starwars-visualguide.com/assets/img/planets/${id}.jpg`} className="img-fluid img-thumbnail"/>
-            <div>
+            <div className="col-md-6">
+                <img 
+                    alt="planet" 
+                    src={`https://starwars-visualguide.com/assets/img/planets/${id}.jpg`} 
+                    className="img-fluid img-thumbnail"
+                />
+            </div>
+            
+            <div className="col-md-6">
                 <h4>Planet: {name}</h4>
                 <ul>
                     <li>

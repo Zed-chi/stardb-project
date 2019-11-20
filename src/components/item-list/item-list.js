@@ -26,6 +26,7 @@ export default class ItemList extends React.Component{
                     <li 
                         key={id}
                         onClick={()=> this.props.onItemSelected(id)}
+                        className="list-group-item list-group-item-action"
                     >
                         {name}
                     </li>);
@@ -40,8 +41,8 @@ export default class ItemList extends React.Component{
         const content = !peopleList ? <Spinner/>: this.renderItems(peopleList);
         
         return (
-            <div>
-                <ul>
+            <div className="col-md-6 card p-2">
+                <ul className="list-group">
                    {content} 
                 </ul>
             </div>

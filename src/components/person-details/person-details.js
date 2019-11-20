@@ -30,16 +30,27 @@ export default class PersonDetails extends React.Component{
         }
 
     }
-
+    componentWillUnmount(){
+        this.setState({
+            person:null
+        })
+    }
     renderPerson(person){
         return (<React.Fragment>
-            <img alt="planet" src={`https://starwars-visualguide.com/assets/img/characters/${person.id}.jpg`} className="img-fluid img-thumbnail"/>
-            <div>
+            <div className="col-md-6">
+                <img 
+                    alt="planet" 
+                    src={`https://starwars-visualguide.com/assets/img/characters/${person.id}.jpg`} 
+                    className="img-thumbnail col-md-* w-100"
+                />
+            </div>
+            
+            <div className="col-md-6">
                 <h4>Name: {person.name}</h4>
-                <ul>
-                    <li>Gender: {person.gender}</li>
-                    <li>Birth Year: {person.birthOfYear}</li>
-                    <li>Eye Color: {person.eyeColor}</li>            
+                <ul className="list-group">
+                    <li className="list-group-item list-group-item-action">Gender: {person.gender}</li>
+                    <li className="list-group-item list-group-item-action">Birth Year: {person.birthOfYear}</li>
+                    <li className="list-group-item list-group-item-action">Eye Color: {person.eyeColor}</li>            
                 </ul>
             </div>
         </React.Fragment>);
@@ -53,7 +64,7 @@ export default class PersonDetails extends React.Component{
             content = this.renderPerson(person);
         }
         return (
-        <div>
+        <div className="card col-md-6 d-flex flex-row p-2 person-details">
             {content}
         </div>
         );
