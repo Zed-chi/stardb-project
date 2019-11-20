@@ -3,6 +3,8 @@ import PersonDetails from "../person-details/person-details";
 import ItemList from "../item-list/item-list";
 import ErrorSplash from "../error-splash/error-splash";
 import "./person-page.css";
+import Swapi from "../../services/swapi";
+
 
 
 export default class PersonPage extends React.Component{  
@@ -27,7 +29,10 @@ export default class PersonPage extends React.Component{
         } else {
             content = 
             <React.Fragment>
-                <ItemList onItemSelected={this.onPersonSelected}/>        
+                <ItemList 
+                    onItemSelected={this.onPersonSelected}
+                    getData={this.props.swapi}
+                />        
                 <PersonDetails personId={this.state.selectedPerson}/>
             </React.Fragment>
             ;

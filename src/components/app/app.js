@@ -5,8 +5,10 @@ import PersonsPage from "../persons-page/person-page";
 import Planetdetails from "../planet-details/planet-details";
 import StarshipDetails from "../starship-details/starship-details";
 import "./app.css";
+import Swapi from "../../services/swapi";
 
 class App extends React.Component{
+    swapi = new Swapi();
     state = {        
         showRandomPlanet:true
     }
@@ -21,9 +23,9 @@ class App extends React.Component{
                 <RandomPlanet/>
                 </div>
                 
-                <PersonsPage/>
-                <PersonsPage/>
-                <PersonsPage/>
+                <PersonsPage swapi={this.swapi.getAllPeople}/>
+                <PersonsPage swapi={this.swapi.getAllPlanets}/>
+                <PersonsPage swapi={this.swapi.getAllStarships}/>
                 
             </div>
         );
