@@ -19,8 +19,8 @@ export default class ItemList extends React.Component{
         })
     }
 
-    renderItems(peopleList) {
-        return peopleList.map(
+    renderItems(itemList) {
+        return itemList.map(
             ({id, name})=>{
                 return (
                     <li 
@@ -37,8 +37,8 @@ export default class ItemList extends React.Component{
 
 
     render(){
-        const {peopleList} = this.state;
-        const content = !peopleList ? <Spinner/>: this.renderItems(peopleList);
+        const {itemList} = this.state;
+        const content = !itemList ? <Spinner/>: this.renderItems(itemList);
         
         return (
             <div className="col-md-6 card p-2">
