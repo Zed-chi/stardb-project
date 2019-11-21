@@ -5,6 +5,23 @@ import ErrorSplash from "../error-splash/error-splash";
 import "./person-page.css";
 import Swapi from "../../services/swapi";
 
+class ErrorBoundry extends React.Component{
+    state = {
+        hasError:false,
+    } 
+    componentDidCatch(){
+        this.setState({
+            hasError:true,
+        })
+    }
+    render(){
+        if (this.state.hasError){
+            return <ErrorSplash/>;
+        } 
+        return this.props.children
+
+    }
+}
 
 
 export default class PersonPage extends React.Component{  
@@ -17,30 +34,32 @@ export default class PersonPage extends React.Component{
             selectedPerson:id
         })
     }
-    componentDidCatch(){
-        this.setState({
-            hasError:true,
-        })
-    }
+
     render (){
         let content = null;
         if (this.state.hasError){
             content = <ErrorSplash/>;
         } else {
+            const itemList = (<ItemList 
+                onItemSelected={this.onPersonSelected}
+                getData={this.props.swapi}
+                renderItem={({name, gender, birthOfYear})=>`${name} (${gender}, ${birthOfYear})`}
+            />);
+            const personDetails = (<PersonDetails personId={this.state.selectedPerson}/>);
             content = 
             <React.Fragment>
-                <ItemList 
-                    onItemSelected={this.onPersonSelected}
-                    getData={this.props.swapi}
-                />        
-                <PersonDetails personId={this.state.selectedPerson}/>
+                {itemList}           
+                {personDetails}
             </React.Fragment>
             ;
         }
         return (
-            <div className="row">
-                {content}  
-            </div>
+            <ErrorBoundry>
+                <div className="row">
+                    {content}  
+                </div>
+            </ErrorBoundry>
+            
         );
     }
     
