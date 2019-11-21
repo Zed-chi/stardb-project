@@ -19,22 +19,20 @@ export default class ItemList extends React.Component{
         })
     }
 
-    renderItems(itemList) {
-        return itemList.map(
-            ({id, name})=>{
-                return (
-                    <li 
-                        key={id}
-                        onClick={()=> this.props.onItemSelected(id)}
-                        className="list-group-item list-group-item-action"
-                    >
-                        {name}
-                    </li>);
+    renderItems = (itemList)=> {
+        return itemList.map((item)=>{
+            const {id} = item;
+            const name = this.props.renderItem(item);
+            return (<li 
+                    key={id}
+                    onClick={()=> this.props.onItemSelected(id)}
+                    className="list-group-item list-group-item-action"
+                >
+                    {name}
+                </li>);
             }
-        );
-    }
-    
-
+        );  
+    };
 
     render(){
         const {itemList} = this.state;
