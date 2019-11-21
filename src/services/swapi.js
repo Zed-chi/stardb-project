@@ -1,8 +1,10 @@
 class SwapiService {
-    _URL = "https://swapi.co/api";
+    _apiBaseUrl = "https://swapi.co/api";
+    _imgBaseUrl = "https://starwars-visualguide.com/assets/img";
+
 
     getResource = async (url) => {
-        const res = await fetch(this._URL + url);
+        const res = await fetch(this._apiBaseUrl + url);
         const body = await res.json();
         return body;
     }
@@ -76,6 +78,18 @@ class SwapiService {
             cargoCapacity: spaceship.cargoCapacity,
         };
     }
+
+    getPersonImage = ({id})=>{
+        return `${this._imgBaseUrl}/characters/${id}.jpg`
+    };
+
+    getStarshipImage = ({id})=>{
+        return `${this._imgBaseUrl}/starships/${id}.jpg`
+    };
+
+    getPlanetImage = ({id})=>{
+        return `${this._imgBaseUrl}/planets/${id}.jpg`
+    };
 }
 
 export default SwapiService;
