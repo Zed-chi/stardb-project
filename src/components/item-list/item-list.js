@@ -3,21 +3,7 @@ import "./item-list.css";
 import Spinner from "../spinner/spinner";
 
 
-export default class ItemList extends React.Component{
-    
-    state = {
-        itemList:[]
-    }
-
-    componentDidMount(){
-        const {getData} = this.props;
-        getData()
-        .then((itemList)=>{
-            this.setState({
-                itemList
-            })
-        })
-    }
+class ItemList extends React.Component{
 
     renderItems = (itemList)=> {
         return itemList.map((item)=>{
@@ -35,9 +21,8 @@ export default class ItemList extends React.Component{
     };
 
     render(){
-        const {itemList} = this.state;
-        const content = !itemList ? <Spinner/>: this.renderItems(itemList);
-        
+        const {data} = this.props;
+        const content = this.renderItems(data);
         return (
             <div className="col-md-6 card p-2">
                 <ul className="list-group">
@@ -47,3 +32,34 @@ export default class ItemList extends React.Component{
         );
     }
 };
+
+
+const withData = (View, getData)=>{
+    return class extends Component{
+            
+        state = {
+            data:[]
+        }
+
+        componentDidMount(){
+            const {getData} = this.props;
+            getData()
+            .then((data)=>{
+                this.setState({
+                    data
+                })
+            })
+        }
+
+        render(){
+            const {data} = this.state;
+            if (!data){
+                return <Spinner/>;
+            }
+            return <View {...this.props} data={data}/>;
+        }
+    };
+};
+
+
+export default withData(ItemList);
