@@ -21,16 +21,14 @@ class App extends React.Component{
             <ErrorBoundry>
                 <div className="container">
                     <Header/>
-                    <PersonList>
-                        {({name})=><span>{name}</span>}
-                    </PersonList> 
+
+                    <PersonList/> 
+
                     <PersonDetails itemId={9}/>
-                    <PlanetList>
-                    {({name})=><span>{name}</span>}
-                    </PlanetList>                  
-                    <StarshipList>
-                    {({name})=><span>{name}</span>}
-                    </StarshipList> 
+
+                    <PlanetList/>                 
+
+                    <StarshipList/>                                        
                 </div>
             </ErrorBoundry>            
         );
