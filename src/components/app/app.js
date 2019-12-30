@@ -9,6 +9,7 @@ import "./app.css";
 import Swapi from "../../services/swapi";
 import {PersonList, PlanetList, StarshipList} from "../sw-components/item-lists";
 import {PersonDetails,PlanetDetails,StarshipDetails} from "../sw-components/details";
+import {SwapiServiceProvider} from "../swapi-service-context/swapi-service-cotext";
 
 class App extends React.Component{
     swapi = new Swapi();
@@ -19,6 +20,7 @@ class App extends React.Component{
     render(){
         return (
             <ErrorBoundry>
+                <SwapiServiceProvider value={this.swapi}>
                 <div className="container">
                     <Header/>
 
@@ -30,6 +32,7 @@ class App extends React.Component{
 
                     <StarshipList/>                                        
                 </div>
+                </SwapiServiceProvider>
             </ErrorBoundry>            
         );
     }
